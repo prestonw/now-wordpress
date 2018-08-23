@@ -1,18 +1,23 @@
-FROM alpine:edge as base
-WORKDIR /usr/src/app
-RUN apk --update --no-cache add curl libstdc++ libgcc && \
-    curl -LO https://github.com/zeit/now-cli/releases/download/12.0.0-canary.70/now-alpine.gz && \
-    gunzip now-alpine.gz && \
-    chmod +x now-alpine && \
-    mv now-alpine /bin/now
-ARG NOW_TOKEN
-COPY . .
-RUN find . -maxdepth 1 -type d '!' -path '.' '!' -path './meta' -print0 | \
-    sort -z | \
-    xargs -0 -n 1 -I{} ./meta/deploy {} "$NOW_TOKEN" && \
-    echo "</ul></body></html>" >> meta/index.html
+FROM zeit/wait-for:0.2 as wait
 
-FROM jtyr/asmttpd
-COPY --from=base /usr/src/app/meta/index.html /data
-COPY --from=base /usr/src/app/meta/css /data/css
-COPY --from=base /usr/src/app/meta/images /data/images
+FROM php:7-fpm-alpine
+COPY --from=wait /bin/wait-for /bin/wait-for
+RUN apk add --no-cache curl nginx bash
+RUN curl -s --fail https://wordpress.org/latest.zip -o /var/www/latest.zip && \
+  curl -s --fail https://downloads.wordpress.org/plugin/sqlite-integration.1.8.1.zip -o /var/www/sqlite-integration.zip && \
+  cd /var/www && \
+  unzip -q latest.zip && \
+  unzip -q sqlite-integration.zip && \
+  rm -rf *.zip && \
+  mv sqlite-integration wordpress/wp-content/plugins && \
+  cp wordpress/wp-content/plugins/sqlite-integration/db.php wordpress/wp-content/
+
+COPY src/php-fpm.conf /usr/local/etc
+COPY src/nginx.conf /etc/nginx
+COPY src/run.sh .
+COPY src/wp-config.php /var/www/wordpress/
+
+# copy in the sqlite database
+COPY data /data
+
+CMD ["./run.sh"]

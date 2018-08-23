@@ -1,12 +1,5 @@
 {
-  "type": "docker",
-  "alias": "now-examples.now.sh",
   "features": {
     "cloud": "v2"
-  },
-  "build": {
-    "env": {
-      "NOW_TOKEN": "@now-token"
-    }
   }
 }
