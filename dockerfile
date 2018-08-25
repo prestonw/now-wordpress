@@ -35,10 +35,11 @@ RUN curl -s --fail https://wordpress.org/latest.zip -o /var/www/latest.zip && \
   mv w3-total-cache wordpress/wp-content/plugins && \
   mv shortpixel wordpress/wp-content/plugins && \
   mv hestia wordpress/wp-content/themes && \
-  cp wordpress/wp-content/plugins/sqlite-integration/db.php wordpress/wp-content/
   mv day.jpg wordpress/wp-content/uploads/2018/08/day.jpg && \
   mv night.jpg wordpress/wp-content/uploads/2018/08/night.jpg && \
   mv cafe.jpg wordpress/wp-content/uploads/2018/08/cafe.jpg && \
+
+  cp wordpress/wp-content/plugins/sqlite-integration/db.php wordpress/wp-content/
 
 COPY src/php-fpm.conf /usr/local/etc
 COPY src/nginx.conf /etc/nginx
