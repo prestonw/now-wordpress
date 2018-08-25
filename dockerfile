@@ -35,7 +35,6 @@ mv sqlite-integration wordpress/wp-content/plugins && \
   mv pirate-forms wordpress/wp-content/plugins && \
   mv wp-mail-smtp wordpress/wp-content/plugins && \
   mv w3-total-cache wordpress/wp-content/plugins && \
-  mv shortpixel wordpress/wp-content/plugins && \
   mv hestia wordpress/wp-content/themes && \
   mv day.jpg wordpress/wp-content/uploads/2018/08/day.jpg && \
   mv night.jpg wordpress/wp-content/uploads/2018/08/night.jpg && \
