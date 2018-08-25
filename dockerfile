@@ -22,12 +22,14 @@ RUN curl -s --fail https://wordpress.org/latest.zip -o /var/www/latest.zip && \
   unzip -q classic-editor.zip && \
   unzip -q hestia.zip && \
   unzip -q elementor.zip && \
+  unzip -q shortpixel.zip && \
   unzip -q pirate-forms.zip && \
   unzip -q wp-mail-smtp.zip && \
   unzip -q w3-total-cache.zip && \
-  unzip -q shortpixel.zip && \
+  
   rm -rf *.zip && \
-  mv sqlite-integration wordpress/wp-content/plugins && \
+
+mv sqlite-integration wordpress/wp-content/plugins && \
   mv classic-editor wordpress/wp-content/plugins && \
   mv elementor wordpress/wp-content/plugins && \
   mv pirate-forms wordpress/wp-content/plugins && \
