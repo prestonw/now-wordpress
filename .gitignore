@@ -1,2 +1,4 @@
 .DS_Store
-ssl
+ssl/server.csr.cnf
+ssl/serverv3.ext
+ssl/server.csr
