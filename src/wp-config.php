@@ -6,7 +6,7 @@ define('DB_COLLATE', '');
 
 $table_prefix  = 'wp_';
 
-$protocol = 'http';
+$protocol = 'https';
 if( isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) {
   $_SERVER['HTTPS']='on';
   $protocol = 'https';
